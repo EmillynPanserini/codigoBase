@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Cadastro</title>
+
+    <link rel="icon" type="image/x-icon" href="../midias/logoIcon.ico" />
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+
+    <nav class="menu">
+      <figure class="logo">
+        <img src="../midias/logoIcon.png" alt="Logo" />
+
+        <figcaption>Doação de Sangue</figcaption>
+      </figure>
+
+      <ul>
+        <li><a href="../index.html">Início</a></li>
+
+        <li><a href="sobre.html">Sobre</a></li>
+
+        <li class="dropdown">
+          <a href="#"> Informações</a>
+
+          <ul class="submenu">
+            <li><a href="informacoes.html#agendamento">Agendamento</a></li>
+
+            <li><a href="informacoes.html#requisitos">Requisitos</a></li>
+
+            <li><a href="informacoes.html#doar">Quem não pode doar</a></li>
+          </ul>
+        </li>
+
+        <li><a href="contato.html">Cadastro</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section>
+        <article>
+          <h2>Formulário</h2>
+
+          <form>
+            <label>Nome</label>
+            <input type="text" id="nome" />
+
+            <label>Email</label>
+            <input type="email" id="email" />
+
+            <label>Idade</label>
+            <input type="number" id="idade" />
+
+            <label>Data de nascimento</label>
+            <input type="date" id="nascimento" />
+
+            <label>Gênero</label>
+
+            <select id="genero">
+              <option value="">Selecione</option>
+              <option>Masculino</option>
+              <option>Feminino</option>
+            </select>
+
+            <button type="button" onclick="mostrarDados()">Enviar</button>
+            <button type="button" onclick="limparDados()">Limpar</button>
+          </form>
+
+          <h3>Dados informados:</h3>
+
+          <p id="saida">Seus dados.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright © Emillyn Panserini</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>
