@@ -8,35 +8,43 @@
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   display: grid;
-  grid-template-columns: 220px 1fr 220px;
-  grid-template-rows: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
-    "nav main aside"
-    "footer footer footer";
-
+    "nav nav"
+    "main aside"
+    "footer footer";
   min-height: 100vh;
   background: #ffffff;
   color: #e2e8f0;
+}
+
+body:not(:has(aside)) {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "nav"
+    "main"
+    "footer";
 }
 
 /* 
    logo navbar
 */
 
-.logo{
-
-text-align:center;
-padding:20px;
-border-bottom:
-1px solid rgba(22, 2, 2, 0.1);
-
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  padding: 10px 20px;
+  border-right: 1px solid rgba(22, 2, 2, 0.1);
 }
 
 .logo img {
-width:80px;
-height:80px;
-object-fit:contain;
-margin-bottom:10px;
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  margin-bottom: 0;
 }
 
 .logo figcaption{
@@ -55,12 +63,23 @@ color:#000000;
 
 nav {
   grid-area: nav;
-  border-right: 1px solid rgba(155, 46, 46, 0.1);
-  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid rgba(155, 46, 46, 0.1);
+  min-height: auto;
+  padding: 0 20px;
+  background: #ffffff;
 }
 
-.menu ul {
+.menu > ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
   list-style: none;
+  margin-left: 0;
 }
 
 .menu li {
@@ -69,10 +88,11 @@ nav {
 
 .menu a {
   display: block;
-  font-style: bold;
-  padding: 15px;
+  font-weight: bold;
+  padding: 15px 18px;
   color: #000000;
   text-decoration: none;
+  border-radius: 8px;
   transition: 0.3s;
 }
 
@@ -93,29 +113,37 @@ nav {
   submenu 
 */
 
-.submenu{
-  display:none;
-  position:relative;
-  background:#f7d5d5;
-  width:100%;
-  margin-top:0;
-  border-left:3px solid #ca5252;
 
-}
 
 /* mostrar submenu */
 
-.dropdown:hover .submenu{
+.dropdown:hover > .submenu{
   display:block;
 }
 
 /* Links internos */
 
-.submenu a{
-  padding-left:35px;
-  font-size:14px;
 
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  background: #f7d5d5;
+  min-width: 210px;
+  width: max-content;
+  margin-top: 0;
+  border-left: 3px solid #ca5252;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
+
+.submenu a {
+  padding: 12px 18px;
+  font-size: 14px;
+}
+
 /* 
    main
  */
@@ -279,16 +307,44 @@ footer {
   responsividade
 */
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   body {
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: auto 1fr auto auto;
     grid-template-areas:
-      "header"
       "nav"
       "main"
       "aside"
       "footer";
+  }
+
+  body:not(:has(aside)) {
+    grid-template-areas:
+      "nav"
+      "main"
+      "footer";
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .logo {
+    justify-content: center;
+    border-right: none;
+    padding: 5px 10px;
+  }
+
+  .menu > ul {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .menu a {
+    padding: 12px 14px;
   }
 
   main,
@@ -302,3 +358,39 @@ footer {
   }
 }
 
+@media (min-width: 992px) {
+  body {
+    grid-template-columns: minmax(0, 1fr) 220px;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "nav nav"
+      "main aside"
+      "footer footer";
+  }
+
+  body:not(:has(aside)) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nav"
+      "main"
+      "footer";
+  }
+
+  nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu > ul {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: max-content;
+  }
+}
